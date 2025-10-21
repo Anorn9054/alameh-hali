@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ارسال نظر - مدرسه علامه حلی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        :root {
+            --primary: #1a4d8c;
+            --secondary: #f8b739;
+            --light: #f5f5f5;
+            --dark: #333;
+            --success: #28a745;
+            --danger: #dc3545;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cpath fill='%231a4d8c' fill-opacity='0.05' d='M42.5,42.5 C50.3,34.7 60.7,30 71.5,30 C82.3,30 92.7,34.7 100.5,42.5 C108.3,50.3 113,60.7 113,71.5 C113,82.3 108.3,92.7 100.5,100.5 C92.7,108.3 82.3,113 71.5,113 C60.7,113 50.3,108.3 42.5,100.5 C34.7,92.7 30,82.3 30,71.5 C30,60.7 34.7,50.3 42.5,42.5 Z' /%3E%3C/svg%3E"),
+                          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cpolygon fill='%23f8b739' fill-opacity='0.05' points='75,30 90,60 120,60 97.5,82.5 105,120 75,97.5 45,120 52.5,82.5 30,60 60,60' /%3E%3C/svg%3E"),
+                          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect x='25' y='25' width='50' height='50' fill='%231a4d8c' fill-opacity='0.05' /%3E%3C/svg%3E"),
+                          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cellipse cx='40' cy='40' rx='30' ry='15' fill='%23f8b739' fill-opacity='0.05' /%3E%3C/svg%3E");
+            background-size: 200px 200px, 150px 150px, 100px 100px, 80px 80px;
+            background-position: 10% 20%, 90% 80%, 5% 85%, 95% 15%;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* هدر */
+        header {
+            background: linear-gradient(135deg, var(--primary), #0d3a6e);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .logo p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* بخش اصلی */
+        .comments-page {
+            padding: 50px 0;
+            min-height: 70vh;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .comments-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        @media (max-width: 992px) {
+            .comments-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* فرم ارسال نظر */
+        .comment-form-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .comment-form-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%231a4d8c' fill-opacity='0.03' d='M20,20 L80,20 L80,80 L20,80 Z M30,30 L70,30 L70,70 L30,70 Z' /%3E%3C/svg%3E"),
+                          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath fill='%23f8b739' fill-opacity='0.03' d='M40,10 L50,30 L70,30 L55,45 L65,70 L40,55 L15,70 L25,45 L10,30 L30,30 Z' /%3E%3C/svg%3E");
+            background-size: 100px 100px, 80px 80px;
+            background-position: 90% 10%, 10% 90%;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        
+        .comment-form-section > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 77, 140, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .news-select {
+            background: white;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 15px;
+            width: 100%;
+            font-size: 1rem;
+        }
+        
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: #0d3a6e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* راهنما */
+        .instructions-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .instructions-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cellipse cx='60' cy='60' rx='40' ry='20' fill='%231a4d8c' fill-opacity='0.03' /%3E%3C/svg%3E"),
+                          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'%3E%3Ccircle cx='35' cy='35' r='30' fill='%23f8b739' fill-opacity='0.03' /%3E%3C/svg%3E");
+            background-size: 120px 120px, 70px 70px;
+            background-position: 10% 10%, 90% 90%;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        
+        .instructions-section > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .instructions-list {
+            list-style: none;
+            space-y: 15px;
+        }
+        
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .instruction-icon {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .instruction-content h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .instruction-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* پیام موفقیت */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+            margin-bottom: 25px;
+            display: none;
+        }
+        
+        /* آمار */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary), #0d3a6e);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cpolygon fill='%23ffffff' fill-opacity='0.05' points='75,30 90,60 120,60 97.5,82.5 105,120 75,97.5 45,120 52.5,82.5 30,60 60,60' /%3E%3C/svg%3E"),
+                          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect x='25' y='25' width='50' height='50' fill='%23ffffff' fill-opacity='0.05' /%3E%3C/svg%3E");
+            background-size: 150px 150px, 100px 100px;
+            background-position: 10% 20%, 90% 80%;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        
+        .stats-section > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 30px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* فوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-right: 8px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* رسپانسیو */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .comment-form-section,
+            .instructions-section {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-school fa-2x"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>مدرسه استعدادهای درخشان علامه حلی</h1>
+                        <p>پرورش استعدادهای برتر ایران زمین</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">خانه</a></li>
+                        <li><a href="index.html#news">اخبار</a></li>
+                        <li><a href="gallery.html">گالری تصاویر</a></li>
+                        <li><a href="quran.html">قرآن و عترت</a></li>
+                        <li><a href="comments.html" class="active">ارسال نظر</a></li>
+                        <li><a href="#contact">تماس با ما</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- بخش اصلی -->
+    <section class="comments-page">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">ارسال نظر و پیشنهاد</h1>
+                <p class="page-subtitle">نظرات، پیشنهادات و انتقادات خود را با ما در میان بگذارید</p>
+            </div>
+
+            <div class="comments-container">
+                <!-- فرم ارسال نظر -->
+                <div class="comment-form-section">
+                    <h2 class="section-title">فرم ارسال نظر</h2>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>نظر شما با موفقیت ثبت شد!</strong>
+                        <p>نظر شما پس از تایید مدیریت در سایت نمایش داده خواهد شد.</p>
+                    </div>
+                    
+                    <form id="commentForm">
+                        <div class="form-group">
+                            <label for="commentType" class="form-label">نوع نظر</label>
+                            <select id="commentType" class="news-select" required>
+                                <option value="">لطفاً انتخاب کنید</option>
+                                <option value="general">عمومی</option>
+                                <option value="criticism">انتقادات</option>
+                                <option value="suggestion">پیشنهادات</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newsSelect" class="form-label">انتخاب خبر (اختیاری)</label>
+                            <select id="newsSelect" class="news-select">
+                                <option value="">بدون انتخاب خبر</option>
+                                <!-- اخبار به صورت دینامیک لود می‌شوند -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="authorName" class="form-label">نام و نام خانوادگی</label>
+                            <input type="text" id="authorName" class="form-control" placeholder="نام خود را وارد کنید" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="authorEmail" class="form-label">آدرس ایمیل</label>
+                            <input type="email" id="authorEmail" class="form-control" placeholder="email@example.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="commentContent" class="form-label">متن نظر</label>
+                            <textarea id="commentContent" class="form-control" placeholder="نظر، پیشنهاد یا انتقاد خود را بنویسید..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            ارسال نظر
+                        </button>
+                    </form>
+                </div>
+
+                <!-- راهنمای ارسال نظر -->
+                <div class="instructions-section">
+                    <h2 class="section-title">راهنمای ارسال نظر</h2>
+                    
+                    <ul class="instructions-list">
+                        <li class="instruction-item">
+                            <div class="instruction-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="instruction-content">
+                                <h4>نظرات سازنده</h4>
+                                <p>لطفاً نظرات خود را به صورت سازنده و محترمانه بیان کنید</p>
+                            </div>
+                        </li>
+                        
+                        <li class="instruction-item">
+                            <div class="instruction-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="instruction-content">
+                                <h4>تایید مدیریت</h4>
+                                <p>تمامی نظرات قبل از نمایش در سایت توسط مدیریت بررسی می‌شوند</p>
+                            </div>
+                        </li>
+                        
+                        <li class="instruction-item">
+                            <div class="instruction-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="instruction-content">
+                                <h4>زمان تایید</h4>
+                                <p>نظرات معمولاً در مدت ۲۴ ساعت پس از ارسال بررسی و تایید می‌شوند</p>
+                            </div>
+                        </li>
+                        
+                        <li class="instruction-item">
+                            <div class="instruction-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="instruction-content">
+                                <h4>پاسخ به نظرات</h4>
+                                <p>در صورت نیاز، پاسخ نظرات شما از طریق ایمیل ارسال خواهد شد</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- آمار -->
+            <div class="stats-section">
+                <h2>آمار نظرات</h2>
+                <p>نظرات ارسالی کاربران محترم</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalComments">۰</div>
+                        <div class="stat-label">کل نظرات ارسالی</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number" id="approvedComments">۰</div>
+                        <div class="stat-label">نظرات تایید شده</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number" id="pendingComments">۰</div>
+                        <div class="stat-label">در انتظار تایید</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number" id="newsCount">۰</div>
+                        <div class="stat-label">تعداد اخبار</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>درباره مدرسه</h3>
+                    <p>مدرسه استعدادهای درخشان علامه حلی با بیش از سه دهه سابقه درخشان در زمینه پرورش استعدادهای برتر دانش‌آموزی، همواره در تلاش است تا محیطی پویا برای رشد علمی و اخلاقی دانش‌آموزان فراهم کند.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>لینک‌های مفید</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">صفحه اصلی</a></li>
+                        <li><a href="index.html#news">اخبار و رویدادها</a></li>
+                        <li><a href="gallery.html">گالری تصاویر</a></li>
+                        <li><a href="comments.html">ارسال نظر</a></li>
+                        <li><a href="quran.html">قرآن و عترت</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>تماس با ما</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>تهران، خیابان ولیعصر، پلاک ۱۰۰</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>۰۲۱-۲۲۲۲۲۲۲۲</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@helli-school.ir</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>کلیه حقوق این وب‌سایت متعلق به مدرسه استعدادهای درخشان علامه حلی می‌باشد. © ۱۴۰۳</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // داده‌های نمونه برای نظرات
+        const defaultComments = {
+            1: [
+                {
+                    id: 1,
+                    newsId: 1,
+                    author: "والدین دانش آموز",
+                    email: "parent@example.com",
+                    content: "بسیار عالی! واقعاً به موفقیت بچه‌ها افتخار می‌کنیم.",
+                    date: "۱۴۰۳/۰۳/۲۶",
+                    time: "۱۰:۳۰",
+                    status: "approved"
+                }
+            ]
+        };
+
+        // بارگذاری اخبار برای dropdown
+        function loadNewsForComments() {
+            const newsSelect = document.getElementById('newsSelect');
+            const savedNews = localStorage.getItem('schoolNews');
+            
+            if (savedNews) {
+                const newsData = JSON.parse(savedNews);
+                
+                newsData.forEach(news => {
+                    const option = document.createElement('option');
+                    option.value = news.id;
+                    option.textContent = news.title;
+                    newsSelect.appendChild(option);
+                });
+            } else {
+                // داده‌های نمونه
+                const sampleNews = [
+                    {
+                        id: 1,
+                        title: "کسب مقام اول در مسابقات علمی کشوری",
+                        date: "۱۴۰۳/۰۳/۲۵",
+                        content: "تیم المپیاد دانش‌آموزی مدرسه علامه حلی در مسابقات علمی کشوری مقام اول را کسب کرد...",
+                        image: ""
+                    }
+                ];
+                localStorage.setItem('schoolNews', JSON.stringify(sampleNews));
+                loadNewsForComments();
+            }
+        }
+
+        // به‌روزرسانی آمار
+        function updateCommentsStats() {
+            const savedComments = localStorage.getItem('schoolComments');
+            const savedNews = localStorage.getItem('schoolNews');
+            const commentsData = savedComments ? JSON.parse(savedComments) : defaultComments;
+            const newsData = savedNews ? JSON.parse(savedNews) : [];
+            
+            let totalComments = 0;
+            let approvedComments = 0;
+            let pendingComments = 0;
+            
+            // شمارش نظرات
+            Object.keys(commentsData).forEach(newsId => {
+                commentsData[newsId].forEach(comment => {
+                    totalComments++;
+                    if (comment.status === 'approved') {
+                        approvedComments++;
+                    } else if (comment.status === 'pending') {
+                        pendingComments++;
+                    }
+                });
+            });
+            
+            // به‌روزرسانی اعداد
+            document.getElementById('totalComments').textContent = totalComments;
+            document.getElementById('approvedComments').textContent = approvedComments;
+            document.getElementById('pendingComments').textContent = pendingComments;
+            document.getElementById('newsCount').textContent = newsData.length;
+        }
+
+        // ارسال نظر جدید
+        function submitComment(event) {
+            event.preventDefault();
+            
+            const commentType = document.getElementById('commentType').value;
+            const newsId = document.getElementById('newsSelect').value;
+            const author = document.getElementById('authorName').value;
+            const email = document.getElementById('authorEmail').value;
+            const content = document.getElementById('commentContent').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            
+            if (!commentType) {
+                alert('لطفاً نوع نظر خود را انتخاب کنید');
+                return;
+            }
+            
+            // غیرفعال کردن دکمه ارسال
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
+            
+            // ذخیره نظر
+            const savedComments = localStorage.getItem('schoolComments');
+            const commentsData = savedComments ? JSON.parse(savedComments) : defaultComments;
+            
+            const newComment = {
+                id: Date.now(),
+                commentType: commentType,
+                newsId: newsId ? parseInt(newsId) : null,
+                author: author,
+                email: email,
+                content: content,
+                date: getCurrentDate(),
+                time: getCurrentTime(),
+                status: 'pending' // در حالت انتظار تایید مدیر
+            };
+            
+            // اگر نظر مربوط به خبر خاصی است
+            if (newsId) {
+                if (!commentsData[newsId]) {
+                    commentsData[newsId] = [];
+                }
+                commentsData[newsId].push(newComment);
+            } else {
+                // اگر نظر عمومی است (بدون انتخاب خبر)
+                if (!commentsData['general']) {
+                    commentsData['general'] = [];
+                }
+                commentsData['general'].push(newComment);
+            }
+            
+            localStorage.setItem('schoolComments', JSON.stringify(commentsData));
+            
+            // نمایش پیام موفقیت
+            successMessage.style.display = 'block';
+            
+            // بازگردانی فرم
+            document.getElementById('commentForm').reset();
+            
+            // فعال کردن دکمه ارسال
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> ارسال نظر';
+            }, 2000);
+            
+            // به‌روزرسانی آمار
+            updateCommentsStats();
+            
+            // اسکرول به بالا
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // دریافت تاریخ جاری
+        function getCurrentDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            return `${year}/${month}/${day}`;
+        }
+
+        // دریافت زمان جاری
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+
+        // بارگذاری اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNewsForComments();
+            updateCommentsStats();
+            
+            // فرم ارسال نظر
+            document.getElementById('commentForm').addEventListener('submit', submitComment);
+        });
+    </script>
+</body>
+</html>

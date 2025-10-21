@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گالری تصاویر - مدرسه علامه حلی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        :root {
+            --primary: #1a4d8c;
+            --secondary: #f8b739;
+            --light: #f5f5f5;
+            --dark: #333;
+            --success: #28a745;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* پس‌زمینه آموزشی با تصاویر وسایل مدرسه */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: 
+                /* مداد رنگی */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='200' viewBox='0 0 80 200'%3E%3Cpath fill='%231a4d8c' fill-opacity='0.05' d='M40 0l40 40-40 160L0 40 40 0zm0 20L20 40l20 140 20-140L40 20z'/%3E%3C/svg%3E"),
+                /* دفتر */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='150' viewBox='0 0 120 150'%3E%3Crect fill='%23f8b739' fill-opacity='0.05' x='10' y='10' width='100' height='130' rx='5'/%3E%3Cline x1='20' y1='30' x2='100' y2='30' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='20' y1='50' x2='100' y2='50' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='20' y1='70' x2='100' y2='70' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='20' y1='90' x2='100' y2='90' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='2'/%3E%3C/svg%3E"),
+                /* پاک‌کن */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='60' viewBox='0 0 100 60'%3E%3Crect fill='%23f8b739' fill-opacity='0.05' x='10' y='10' width='80' height='40' rx='5'/%3E%3C/svg%3E"),
+                /* خط‌کش */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='40' viewBox='0 0 150 40'%3E%3Crect fill='%231a4d8c' fill-opacity='0.05' x='0' y='15' width='150' height='10'/%3E%3Cline x1='10' y1='15' x2='10' y2='25' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='1'/%3E%3Cline x1='30' y1='15' x2='30' y2='25' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='1'/%3E%3Cline x1='50' y1='15' x2='50' y2='25' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='1'/%3E%3Cline x1='70' y1='15' x2='70' y2='25' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='1'/%3E%3Cline x1='90' y1='15' x2='90' y2='25' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='1'/%3E%3Cline x1='110' y1='15' x2='110' y2='25' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='1'/%3E%3Cline x1='130' y1='15' x2='130' y2='25' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='1'/%3E%3Cline x1='140' y1='15' x2='140' y2='25' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='1'/%3E%3C/svg%3E"),
+                /* قیچی */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath fill='%231a4d8c' fill-opacity='0.05' d='M40 0l20 40-20 40-20-40 20-40zm0 10L25 40l15 30 15-30-15-30z'/%3E%3C/svg%3E"),
+                /* تراش */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath fill='%23f8b739' fill-opacity='0.05' d='M30 0l30 30-30 30L0 30 30 0zm0 10L10 30l20 20 20-20-20-20z'/%3E%3C/svg%3E"),
+                /* کتاب */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='120' viewBox='0 0 100 120'%3E%3Cpath fill='%231a4d8c' fill-opacity='0.05' d='M20 10h60v100H20V10zm5 5v90h50V15H25z'/%3E%3Cline x1='30' y1='25' x2='70' y2='25' stroke='%23f8b739' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='30' y1='40' x2='70' y2='40' stroke='%23f8b739' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='30' y1='55' x2='70' y2='55' stroke='%23f8b739' stroke-opacity='0.05' stroke-width='2'/%3E%3C/svg%3E"),
+                /* مداد شمعی */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='120' viewBox='0 0 40 120'%3E%3Crect fill='%23f8b739' fill-opacity='0.05' x='5' y='0' width='30' height='120' rx='5'/%3E%3C/svg%3E");
+            background-position: 
+                5% 10%,   /* مداد رنگی */
+                90% 20%,  /* دفتر */
+                15% 80%,  /* پاک‌کن */
+                80% 70%,  /* خط‌کش */
+                10% 40%,  /* قیچی */
+                85% 50%,  /* تراش */
+                70% 10%,  /* کتاب */
+                25% 60%;  /* مداد شمعی */
+            background-repeat: no-repeat;
+            background-size: auto;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        /* الگوی هندسی ظریف در پس‌زمینه */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(26, 77, 140, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 60%, rgba(248, 183, 57, 0.03) 0%, transparent 20%),
+                linear-gradient(45deg, transparent 49%, rgba(26, 77, 140, 0.02) 49%, rgba(26, 77, 140, 0.02) 51%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(248, 183, 57, 0.02) 49%, rgba(248, 183, 57, 0.02) 51%, transparent 51%);
+            background-size: 400px 400px, 400px 400px, 60px 60px, 60px 60px;
+            z-index: -1;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* هدر */
+        header {
+            background: linear-gradient(135deg, var(--primary), #0d3a6e);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .logo p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* بخش اصلی گالری */
+        .gallery-section {
+            padding: 50px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* فیلترهای گالری */
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* گرید گالری */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .gallery-category {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* لایت باکس */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            padding: 50px;
+        }
+        
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .lightbox-info {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .lightbox-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .lightbox-description {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .lightbox-prev {
+            right: 20px;
+        }
+        
+        .lightbox-next {
+            left: 20px;
+        }
+        
+        .lightbox-nav:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* فوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-right: 8px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* رسپانسیو */
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            /* کاهش تعداد وسایل آموزشی در پس‌زمینه برای دستگاه‌های کوچک */
+            body::before {
+                background-image: 
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='200' viewBox='0 0 80 200'%3E%3Cpath fill='%231a4d8c' fill-opacity='0.05' d='M40 0l40 40-40 160L0 40 40 0zm0 20L20 40l20 140 20-140L40 20z'/%3E%3C/svg%3E"),
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='150' viewBox='0 0 120 150'%3E%3Crect fill='%23f8b739' fill-opacity='0.05' x='10' y='10' width='100' height='130' rx='5'/%3E%3Cline x1='20' y1='30' x2='100' y2='30' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='20' y1='50' x2='100' y2='50' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='20' y1='70' x2='100' y2='70' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='20' y1='90' x2='100' y2='90' stroke='%231a4d8c' stroke-opacity='0.05' stroke-width='2'/%3E%3C/svg%3E"),
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='60' viewBox='0 0 100 60'%3E%3Crect fill='%23f8b739' fill-opacity='0.05' x='10' y='10' width='80' height='40' rx='5'/%3E%3C/svg%3E"),
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='120' viewBox='0 0 100 120'%3E%3Cpath fill='%231a4d8c' fill-opacity='0.05' d='M20 10h60v100H20V10zm5 5v90h50V15H25z'/%3E%3Cline x1='30' y1='25' x2='70' y2='25' stroke='%23f8b739' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='30' y1='40' x2='70' y2='40' stroke='%23f8b739' stroke-opacity='0.05' stroke-width='2'/%3E%3Cline x1='30' y1='55' x2='70' y2='55' stroke='%23f8b739' stroke-opacity='0.05' stroke-width='2'/%3E%3C/svg%3E");
+                background-position: 
+                    5% 10%,   /* مداد رنگی */
+                    90% 20%,  /* دفتر */
+                    15% 80%,  /* پاک‌کن */
+                    70% 10%;  /* کتاب */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .lightbox {
+                padding: 20px;
+            }
+            
+            .lightbox-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .gallery-filters {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            
+            /* حذف وسایل آموزشی در پس‌زمینه برای دستگاه‌های بسیار کوچک */
+            body::before {
+                background-image: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-school fa-2x"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>مدرسه استعدادهای درخشان علامه حلی</h1>
+                        <p>پرورش استعدادهای برتر ایران زمین</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">خانه</a></li>
+                        <li><a href="index.html#news">اخبار</a></li>
+                        <li><a href="gallery.html" class="active">گالری تصاویر</a></li>
+                        <li><a href="quran.html">قرآن و عترت</a></li>
+                        <li><a href="comments.html">ارسال نظر</a></li>
+                        <li><a href="#contact">تماس با ما</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- بخش اصلی گالری -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">گالری تصاویر مدرسه</h1>
+                <p class="page-subtitle">در این بخش می‌توانید تصاویر مختلف از فعالیت‌ها، مراسم‌ها، اردوها و فضای آموزشی مدرسه را مشاهده کنید</p>
+            </div>
+            
+            <!-- فیلترهای دسته‌بندی -->
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">همه تصاویر</button>
+                <button class="filter-btn" data-filter="ceremony">مراسم‌ها</button>
+                <button class="filter-btn" data-filter="sport">فعالیت‌های ورزشی</button>
+                <button class="filter-btn" data-filter="science">فعالیت‌های علمی</button>
+                <button class="filter-btn" data-filter="campus">فضای آموزشی</button>
+                <button class="filter-btn" data-filter="trip">اردوها</button>
+            </div>
+            
+            <!-- گرید گالری -->
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- تصاویر به صورت دینامیک لود می‌شوند -->
+            </div>
+        </div>
+    </section>
+
+    <!-- لایت باکس -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="lightbox-content">
+            <img class="lightbox-image" id="lightboxImage" src="" alt="">
+            <div class="lightbox-info">
+                <h3 class="lightbox-title" id="lightboxTitle"></h3>
+                <p class="lightbox-description" id="lightboxDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>درباره مدرسه</h3>
+                    <p>مدرسه استعدادهای درخشان علامه حلی با بیش از سه دهه سابقه درخشان در زمینه پرورش استعدادهای برتر دانش‌آموزی، همواره در تلاش است تا محیطی پویا برای رشد علمی و اخلاقی دانش‌آموزان فراهم کند.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>لینک‌های مفید</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">صفحه اصلی</a></li>
+                        <li><a href="index.html#news">اخبار و رویدادها</a></li>
+                        <li><a href="gallery.html">گالری تصاویر</a></li>
+                        <li><a href="comments.html">ارسال نظر</a></li>
+                        <li><a href="quran.html">قرآن و عترت</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>تماس با ما</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>تهران، خیابان ولیعصر، پلاک ۱۰۰</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>۰۲۱-۲۲۲۲۲۲۲۲</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@helli-school.ir</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>کلیه حقوق این وب‌سایت متعلق به مدرسه استعدادهای درخشان علامه حلی می‌باشد. © ۱۴۰۳</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // داده‌های نمونه برای گالری
+        const defaultGalleryData = [
+            {
+                id: 1,
+                title: "مراسم افتتاحیه سال تحصیلی",
+                category: "ceremony",
+                image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "مراسم باشکوه آغاز سال تحصیلی ۱۴۰۳-۱۴۰۲ با حضور دانش‌آموزان و اولیاء"
+            },
+            {
+                id: 2,
+                title: "مسابقات والیبال مدرسه",
+                category: "sport",
+                image: "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "مسابقات والیبال بین کلاسی در سالن ورزشی مدرسه"
+            },
+            {
+                id: 3,
+                title: "آزمایشگاه شیمی",
+                category: "science",
+                image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "دانش‌آموزان در حال انجام آزمایش‌های شیمی در آزمایشگاه مجهز مدرسه"
+            },
+            {
+                id: 4,
+                title: "نمای داخلی کتابخانه",
+                category: "campus",
+                image: "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "کتابخانه مدرسه با بیش از ۱۰۰۰۰ جلد کتاب در زمینه‌های مختلف"
+            },
+            {
+                id: 5,
+                title: "اردوی علمی دماوند",
+                category: "trip",
+                image: "https://images.unsplash.com/photo-1464822759844-d2d1363b8cab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "اردوی علمی دانش‌آموزان در منطقه دماوند برای مطالعات زمین‌شناسی"
+            },
+            {
+                id: 6,
+                title: "جشن فارغ‌التحصیلی",
+                category: "ceremony",
+                image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "مراسم باشکوه فارغ‌التحصیلی دانش‌آموزان پایه دوازدهم"
+            },
+            {
+                id: 7,
+                title: "مسابقات دو میدانی",
+                category: "sport",
+                image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "مسابقات دو میدانی منطقه‌ای با حضور دانش‌آموزان مدرسه"
+            },
+            {
+                id: 8,
+                title: "کارگاه رباتیک",
+                category: "science",
+                image: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                description: "کارگاه تخصصی رباتیک برای دانش‌آموزان علاقه‌مند"
+            }
+        ];
+
+        // DOM Elements
+        const galleryGrid = document.getElementById('galleryGrid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDescription = document.getElementById('lightboxDescription');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+
+        let currentFilter = 'all';
+        let currentImages = [];
+        let currentIndex = 0;
+
+        // بارگذاری گالری
+        function loadGallery() {
+            const savedGallery = localStorage.getItem('schoolGallery');
+            const images = savedGallery ? JSON.parse(savedGallery) : defaultGalleryData;
+            
+            renderGallery(images);
+            currentImages = images;
+        }
+
+        // رندر گالری
+        function renderGallery(images) {
+            galleryGrid.innerHTML = '';
+            
+            const filteredImages = currentFilter === 'all' 
+                ? images 
+                : images.filter(img => img.category === currentFilter);
+            
+            if (filteredImages.length === 0) {
+                galleryGrid.innerHTML = `
+                    <div style="grid-column:1/-1;text-align:center;padding:40px;color:#666;">
+                        <i class="fas fa-images fa-3x" style="margin-bottom:20px;color:#ddd;"></i>
+                        <p>هیچ تصویری در این دسته‌بندی وجود ندارد.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredImages.forEach((image, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.setAttribute('data-category', image.category);
+                galleryItem.innerHTML = `
+                    <img src="${image.image}" alt="${image.title}" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">${image.title}</div>
+                        <div class="gallery-category">${getCategoryName(image.category)}</div>
+                    </div>
+                `;
+                
+                galleryItem.addEventListener('click', () => openLightbox(filteredImages, index));
+                galleryGrid.appendChild(galleryItem);
+            });
+        }
+
+        // دریافت نام فارسی دسته‌بندی
+        function getCategoryName(category) {
+            const categories = {
+                'all': 'همه',
+                'ceremony': 'مراسم‌ها',
+                'sport': 'فعالیت‌های ورزشی',
+                'science': 'فعالیت‌های علمی',
+                'campus': 'فضای آموزشی',
+                'trip': 'اردوها'
+            };
+            return categories[category] || category;
+        }
+
+        // باز کردن لایت باکس
+        function openLightbox(images, index) {
+            currentImages = images;
+            currentIndex = index;
+            
+            const image = images[index];
+            lightboxImage.src = image.image;
+            lightboxTitle.textContent = image.title;
+            lightboxDescription.textContent = image.description;
+            
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // بستن لایت باکس
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // تصویر بعدی
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % currentImages.length;
+            const image = currentImages[currentIndex];
+            lightboxImage.src = image.image;
+            lightboxTitle.textContent = image.title;
+            lightboxDescription.textContent = image.description;
+        }
+
+        // تصویر قبلی
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+            const image = currentImages[currentIndex];
+            lightboxImage.src = image.image;
+            lightboxTitle.textContent = image.title;
+            lightboxDescription.textContent = image.description;
+        }
+
+        // فیلتر کردن تصاویر
+        function filterImages(filter) {
+            currentFilter = filter;
+            
+            // به‌روزرسانی دکمه‌های فیلتر
+            filterBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-filter') === filter) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // رندر مجدد گالری
+            const savedGallery = localStorage.getItem('schoolGallery');
+            const images = savedGallery ? JSON.parse(savedGallery) : defaultGalleryData;
+            renderGallery(images);
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGallery();
+            
+            // فیلترها
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.getAttribute('data-filter');
+                    filterImages(filter);
+                });
+            });
+            
+            // لایت باکس
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxNext.addEventListener('click', nextImage);
+            lightboxPrev.addEventListener('click', prevImage);
+            
+            // بستن لایت باکس با کلیک خارج
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            // کلیدهای کیبورد
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowRight') nextImage();
+                    if (e.key === 'ArrowLeft') prevImage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

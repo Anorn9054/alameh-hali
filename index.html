@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدرسه استعدادهای درخشان علامه حلی - صفحه اصلی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a4d8c;
+            --secondary: #f8b739;
+            --light: #f5f5f5;
+            --dark: #333;
+            --success: #28a745;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* هدر */
+        header {
+            background: linear-gradient(135deg, var(--primary), #0d3a6e);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .logo p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .admin-btn {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .admin-btn:hover {
+            background: #e0a325;
+        }
+        
+        /* بخش اصلی */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .news-section {
+            flex: 3;
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        /* کارت‌های خبر */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .news-image {
+            height: 180px;
+            width: 100%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #777;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .news-excerpt {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            gap: 10px;
+            color: #0d3a6e;
+        }
+        
+        /* سایدبار */
+        .sidebar-widget {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .widget-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 8px;
+        }
+        
+        .important-dates ul {
+            list-style: none;
+        }
+        
+        .important-dates li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .important-dates li:last-child {
+            border-bottom: none;
+        }
+        
+        .date {
+            background: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .quick-links ul {
+            list-style: none;
+        }
+        
+        .quick-links li {
+            margin-bottom: 10px;
+        }
+        
+        .quick-links a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 10px;
+            border-radius: 4px;
+        }
+        
+        .quick-links a:hover {
+            background-color: #f0f0f0;
+            color: var(--primary);
+        }
+        
+        /* فوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-right: 8px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #0d3a6e;
+            transform: translateY(-5px);
+        }
+        
+        /* استایل برای اخطار */
+        .protection-warning {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.95);
+            color: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            z-index: 99999;
+            text-align: center;
+            font-size: 18px;
+            border: 3px solid red;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: none;
+        }
+        
+        .protection-warning i {
+            font-size: 48px;
+            color: red;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* بخش hero */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary), #0d3a6e);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            background: #e0a325;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هشدار محافظت -->
+    <div class="protection-warning" id="protectionWarning">
+        <i class="fas fa-shield-alt"></i>
+        <div>این عمل مجاز نمی‌باشد</div>
+        <div style="font-size:14px;margin-top:10px;color:#ccc;">کلیک راست و ابزار توسعه‌دهندگان غیرفعال شده‌اند</div>
+    </div>
+
+    <!-- هدر -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-school fa-2x"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>مدرسه استعدادهای درخشان علامه حلی</h1>
+                        <p>پرورش استعدادهای برتر ایران زمین</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">خانه</a></li>
+                        <li><a href="#news">اخبار</a></li>
+                         <li><a href="./gallery.html">گالری تصاویر</a></li>
+                         <li><a href="quran.html">قرآن و عترت</a></li>
+                        <li><a href="comments.html">ارسال نظر</a></li>
+                        
+                        <li><a href="#contact">تماس با ما</a></li>
+                       
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- بخش Hero -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>به مدرسه علامه حلی خوش آمدید</h1>
+                <p>پرورش استعدادهای درخشان، ساختن آینده‌ای روشن</p>
+                <div class="hero-buttons">
+                    <a href="#news" class="btn btn-primary">
+                        <i class="fas fa-newspaper"></i>
+                        مشاهده اخبار
+                    </a>
+                    
+                    </a>
+                    <a href="comments.html" class="btn btn-outline">
+                        <i class="fas fa-comments"></i>
+                        ارسال نظر
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- محتوای اصلی -->
+    <div class="container">
+        <div class="main-content">
+            <!-- بخش اخبار -->
+            <section class="news-section" id="news">
+                <h2 class="section-title">آخرین اخبار مدرسه</h2>
+                <div class="news-grid" id="newsContainer">
+                    <!-- اخبار به صورت دینامیک لود می‌شوند -->
+                </div>
+            </section>
+            
+            <!-- سایدبار -->
+            <aside class="sidebar">
+                <div class="sidebar-widget important-dates">
+                    <h3 class="widget-title">رویدادهای مهم</h3>
+                    <ul id="eventsList">
+                        <!-- رویدادها به صورت دینامیک لود می‌شوند -->
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget quick-links">
+                    <h3 class="widget-title">لینک‌های سریع</h3>
+                    <ul>
+                        <li>
+                            <a href="gallery.html">
+                                <i class="fas fa-images"></i>
+                                <span>گالری تصاویر</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="comments.html">
+                                <i class="fas fa-comments"></i>
+                                <span>ارسال نظر</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>تقویم آموزشی</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-book"></i>
+                                <span>برنامه درسی</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user-graduate"></i>
+                                <span>نتایج امتحانات</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">اعلانات فوری</h3>
+                    <div class="announcement">
+                        <p>ثبت‌نام المپیادهای علمی تا تاریخ ۱۰ تیرماد تمدید شد.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- فوتر -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>درباره مدرسه</h3>
+                    <p>مدرسه استعدادهای درخشان علامه حلی با بیش از سه دهه سابقه درخشان در زمینه پرورش استعدادهای برتر دانش‌آموزی، همواره در تلاش است تا محیطی پویا برای رشد علمی و اخلاقی دانش‌آموزان فراهم کند.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>لینک‌های مفید</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">صفحه اصلی</a></li>
+                        <li><a href="#news">اخبار و رویدادها</a></li>
+                        <li><a href="gallery.html">گالری تصاویر</a></li>
+                        <li><a href="comments.html">ارسال نظر</a></li>
+                        <li><a href="comments.html">قرآن و عترت</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>تماس با ما</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>تهران، خیابان ولیعصر، پلاک ۱۰۰</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>۰۲۱-۲۲۲۲۲۲۲۲</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@helli-school.ir</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>کلیه حقوق این وب‌سایت متعلق به مدرسه استعدادهای درخشان علامه حلی می‌باشد. © ۱۴۰۳</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- دکمه بازگشت به بالا -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // ==================== سیستم محافظت از کدها ====================
+        (function() {
+            'use strict';
+            
+            const warning = document.getElementById('protectionWarning');
+            
+            // نمایش اخطار
+            function showWarning() {
+                warning.style.display = 'block';
+                setTimeout(() => {
+                    warning.style.display = 'none';
+                }, 3000);
+            }
+            
+            // 1. جلوگیری از کلیک راست
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showWarning();
+                return false;
+            });
+            
+            // 2. جلوگیری از کلیدهای میانبر توسعه
+            document.addEventListener('keydown', function(e) {
+                // F12, Ctrl+Shift+I, Ctrl+U, Ctrl+Shift+C, Ctrl+Shift+J
+                if (
+                    e.key === 'F12' ||
+                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                    (e.ctrlKey && e.key === 'u') ||
+                    (e.ctrlKey && e.key === 'U') ||
+                    (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+                    (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                    (e.key === 'F12')
+                ) {
+                    e.preventDefault();
+                    showWarning();
+                    return false;
+                }
+            });
+            
+            // 3. تشخیص باز شدن DevTools از طریق اندازه پنجره
+            let devToolsOpen = false;
+            const threshold = 160;
+            
+            const checkDevTools = function() {
+                const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+                const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+                
+                if ((widthThreshold || heightThreshold) && !devToolsOpen) {
+                    devToolsOpen = true;
+                    showWarning();
+                } else if (!widthThreshold && !heightThreshold) {
+                    devToolsOpen = false;
+                }
+            };
+            
+            // چک مداوم برای DevTools
+            setInterval(checkDevTools, 500);
+            
+            // 4. جلوگیری از drag و drop
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            document.addEventListener('drop', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+        })();
+
+        // ==================== عملکردهای اصلی سایت ====================
+        
+        // داده‌های نمونه برای اخبار
+        const defaultNews = [
+            {
+                id: 1,
+                title: "کسب مقام اول در مسابقات علمی کشوری",
+                date: "۱۴۰۳/۰۳/۲۵",
+                content: "تیم المپیاد دانش‌آموزی مدرسه علامه حلی در مسابقات علمی کشوری مقام اول را کسب کرد و به مسابقات بین‌المللی راه یافت. این موفقیت بزرگ حاصل ماه‌ها تلاش و مطالعه دانش آموزان و راهنمایی‌های اساتید مجرب مدرسه بوده است.",
+                image: ""
+            },
+            {
+                id: 2,
+                title: "برگزاری اردوی علمی در پژوهشگاه دانش‌های بنیادی",
+                date: "۱۴۰۳/۰۳/۲۰",
+                content: "اردوی علمی یک روزه برای دانش‌آموزان پایه دهم در پژوهشگاه دانش‌های بنیادی با هدف آشنایی با پژوهش‌های روز برگزار شد. در این اردو دانش آموزان با آخرین دستاوردهای علمی کشور آشنا شدند.",
+                image: ""
+            },
+            {
+                id: 3,
+                title: "برگزاری مراسم فارغ‌التحصیلی دوره دوازدهم",
+                date: "۱۴۰۳/۰۳/۱۵",
+                content: "مراسم باشکوه فارغ‌التحصیلی دانش‌آموزان پایه دوازدهم با حضور مسئولان مدرسه و اولیاء محترم برگزار شد. در این مراسم از دانش آموزان برتر تقدیر به عمل آمد.",
+                image: ""
+            }
+        ];
+
+        // داده‌های نمونه برای رویدادها
+        const defaultEvents = [
+            { id: 1, title: "آغاز امتحانات پایانی", date: "۱۴۰۳/۰۴/۰۵" },
+            { id: 2, title: "برگزاری المپیاد علمی", date: "۱۴۰۳/۰۴/۱۵" },
+            { id: 3, title: "اردوی تابستانی", date: "۱۴۰۳/۰۵/۲۰" },
+            { id: 4, title: "شروع سال تحصیلی جدید", date: "۱۴۰۳/۰۷/۰۱" }
+        ];
+
+        // بارگذاری اخبار از localStorage
+        function loadNews() {
+            const newsContainer = document.getElementById('newsContainer');
+            const savedNews = localStorage.getItem('schoolNews');
+            const newsData = savedNews ? JSON.parse(savedNews) : defaultNews;
+            
+            if (newsData.length === 0) {
+                newsContainer.innerHTML = '<p>هیچ خبری منتشر نشده است.</p>';
+                return;
+            }
+            
+            newsContainer.innerHTML = '';
+            
+            newsData.forEach(news => {
+                const newsCard = document.createElement('article');
+                newsCard.className = 'news-card';
+                newsCard.innerHTML = `
+                    <div class="news-image">
+                        ${news.image ? `<img src="${news.image}" alt="${news.title}">` : '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#777;"><i class="fas fa-newspaper fa-3x"></i></div>'}
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>${news.date}</span>
+                        </div>
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-excerpt">${news.content.substring(0, 100)}...</p>
+                        <a href="comments.html" class="read-more">
+                            ارسال نظر
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                `;
+                newsContainer.appendChild(newsCard);
+            });
+        }
+        
+        // بارگذاری رویدادها از localStorage
+        function loadEvents() {
+            const eventsList = document.getElementById('eventsList');
+            const savedEvents = localStorage.getItem('schoolEvents');
+            const eventsData = savedEvents ? JSON.parse(savedEvents) : defaultEvents;
+            
+            if (eventsData.length === 0) {
+                eventsList.innerHTML = '<li>هیچ رویدادی برنامه‌ریزی نشده است.</li>';
+                return;
+            }
+            
+            eventsList.innerHTML = '';
+            
+            eventsData.forEach(event => {
+                const eventItem = document.createElement('li');
+                eventItem.innerHTML = `
+                    <span>${event.title}</span>
+                    <span class="date">${event.date}</span>
+                `;
+                eventsList.appendChild(eventItem);
+            });
+        }
+        
+        // دکمه بازگشت به بالا
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // بارگذاری اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNews();
+            loadEvents();
+        });
+    </script>
+</body>
+</html>

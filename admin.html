@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل مدیریت - مدرسه علامه حلی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a4d8c;
+            --primary-light: #2a5d9c;
+            --primary-dark: #0d3a6e;
+            --secondary: #f8b739;
+            --secondary-light: #ffcc66;
+            --light: #f5f7fa;
+            --dark: #2c3e50;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 450px;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        }
+
+        .login-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .login-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .login-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 77, 140, 0.1);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-password:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .btn-warning:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .btn-info {
+            background: var(--info);
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: #138496;
+            transform: translateY(-2px);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .admin-panel {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+            background: var(--light);
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .admin-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-title {
+            font-size: 1.8rem;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .admin-btn {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .admin-btn:hover {
+            background: var(--secondary-light);
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+
+        .admin-tab {
+            padding: 12px 20px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .admin-tab-content {
+            display: none;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-top: 4px solid var(--primary);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dashboard-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .dashboard-card p {
+            color: var(--gray);
+        }
+
+        .news-list, .events-list, .gallery-list, .comments-list {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .news-item, .event-item, .gallery-item, .comment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--gray-light);
+            transition: var(--transition);
+        }
+
+        .news-item:hover, .event-item:hover, .gallery-item:hover, .comment-item:hover {
+            background: #f9f9f9;
+        }
+
+        .news-item:last-child, .event-item:last-child, .gallery-item:last-child, .comment-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item-info h4, .event-item-info h4, .gallery-item-info h4, .comment-item-info h4 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .news-item-date, .event-item-date, .gallery-item-category, .comment-item-meta {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .news-item-actions, .event-item-actions, .gallery-item-actions, .comment-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .image-upload-container {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .image-upload-container:hover {
+            border-color: var(--primary);
+        }
+
+        .image-upload-container i {
+            font-size: 2rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .image-upload-container p {
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 15px;
+            display: none;
+            border-radius: 8px;
+        }
+
+        .gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery-preview-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            box-shadow: var(--box-shadow);
+        }
+
+        .gallery-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-preview-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-preview-actions {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-preview-item:hover .gallery-preview-actions {
+            opacity: 1;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* استایل‌های جدید برای مدیریت نظرات */
+        .comments-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e1e5e9;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .comments-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .comment-admin-item {
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+
+        .comment-admin-item:hover {
+            box-shadow: 0 7px 15px rgba(0,0,0,0.1);
+        }
+
+        .comment-admin-item.pending {
+            border-left: 4px solid var(--warning);
+        }
+
+        .comment-admin-item.approved {
+            border-left: 4px solid var(--success);
+        }
+
+        .comment-admin-item.rejected {
+            border-left: 4px solid var(--danger);
+        }
+
+        .comment-admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .comment-admin-info h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .comment-admin-meta {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .comment-news-info {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .comment-admin-content {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .comment-admin-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-approved {
+            background: #d1edff;
+            color: var(--primary);
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .news-item, .event-item, .gallery-item, .comment-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .news-item-actions, .event-item-actions, .gallery-item-actions, .comment-item-actions {
+                align-self: flex-end;
+            }
+            
+            .admin-header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .admin-tabs {
+                flex-direction: column;
+            }
+            
+            .admin-tab {
+                border-radius: 4px;
+                margin-bottom: 5px;
+            }
+            
+            .login-container {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- صفحه ورود -->
+    <div class="login-container" id="loginPage">
+        <div class="login-header">
+            <h1><i class="fas fa-lock"></i> ورود به پنل مدیریت</h1>
+            <p>مدرسه استعدادهای درخشان علامه حلی</p>
+        </div>
+        
+        <div class="login-body">
+            <div class="alert alert-danger" id="loginError">
+                نام کاربری یا رمز عبور اشتباه است!
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-user"></i> نام کاربری</label>
+                    <input type="text" id="username" class="form-control" placeholder="نام کاربری خود را وارد کنید" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-key"></i> رمز عبور</label>
+                    <div class="password-container">
+                        <input type="password" id="password" class="form-control" placeholder="رمز عبور خود را وارد کنید" required>
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-sign-in-alt"></i> ورود به پنل
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <a href="#"><i class="fas fa-arrow-right"></i> بازگشت به سایت اصلی</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- پنل مدیریت (پس از ورود موفق) -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <div class="container">
+                <div class="admin-header-content">
+                    <h1 class="admin-title">پنل مدیریت مدرسه علامه حلی</h1>
+                    <div class="admin-actions">
+                        <a href="index.html" class="admin-btn">
+                            <i class="fas fa-home"></i> بازگشت به سایت
+                        </a>
+                        <button class="logout-btn" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> خروج
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <!-- داشبورد -->
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <i class="fas fa-newspaper"></i>
+                    <h3 id="newsCount">0</h3>
+                    <p>خبر منتشر شده</p>
+                </div>
+                <div class="dashboard-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3 id="eventsCount">0</h3>
+                    <p>رویداد فعال</p>
+                </div>
+                <div class="dashboard-card">
+                    <i class="fas fa-comments"></i>
+                    <h3 id="commentsCount">0</h3>
+                    <p>نظر جدید</p>
+                </div>
+                <div class="dashboard-card">
+                    <i class="fas fa-images"></i>
+                    <h3 id="galleryCount">0</h3>
+                    <p>تصویر در گالری</p>
+                </div>
+                <div class="dashboard-card">
+                    <i class="fas fa-book-quran"></i>
+                    <h3 id="quranCount">0</h3>
+                    <p>آیه قرآن</p>
+                </div>
+            </div>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="dashboard-tab">
+                    <i class="fas fa-tachometer-alt"></i> داشبورد
+                </button>
+                <button class="admin-tab" data-tab="news-tab">
+                    <i class="fas fa-newspaper"></i> مدیریت اخبار
+                </button>
+                <button class="admin-tab" data-tab="add-news-tab">
+                    <i class="fas fa-plus"></i> افزودن خبر جدید
+                </button>
+                <button class="admin-tab" data-tab="comments-tab">
+                    <i class="fas fa-comments"></i> مدیریت نظرات
+                </button>
+                <button class="admin-tab" data-tab="gallery-tab">
+                    <i class="fas fa-images"></i> مدیریت گالری
+                </button>
+                <button class="admin-tab" data-tab="add-gallery-tab">
+                    <i class="fas fa-plus"></i> افزودن تصویر
+                </button>
+                <button class="admin-tab" data-tab="events-tab">
+                    <i class="fas fa-calendar-alt"></i> مدیریت رویدادها
+                </button>
+                <button class="admin-tab" data-tab="quran-tab">
+                    <i class="fas fa-book-quran"></i> مدیریت قرآن و عترت
+                </button>
+            </div>
+            
+            <!-- تب داشبورد -->
+            <div class="admin-tab-content active" id="dashboard-tab">
+                <h3 class="section-title">داشبورد مدیریت</h3>
+                <p>به پنل مدیریت مدرسه علامه حلی خوش آمدید. از طریق منوی بالا می‌توانید بخش‌های مختلف را مدیریت کنید.</p>
+                
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">
+                        <i class="fas fa-users"></i>
+                        <h3>450</h3>
+                        <p>دانش آموز</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>35</h3>
+                        <p>معلم</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <i class="fas fa-book"></i>
+                        <h3>12</h3>
+                        <p>کلاس درس</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <i class="fas fa-trophy"></i>
+                        <h3>24</h3>
+                        <p>دستاورد</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تب مدیریت اخبار -->
+            <div class="admin-tab-content" id="news-tab">
+                <h3 class="section-title">اخبار موجود</h3>
+                <div class="news-list" id="adminNewsList">
+                    <div class="news-item">
+                        <p>هیچ خبری وجود ندارد.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تب افزودن خبر جدید -->
+            <div class="admin-tab-content" id="add-news-tab">
+                <h3 class="section-title">افزودن خبر جدید</h3>
+                <form id="addNewsForm">
+                    <div class="form-group">
+                        <label for="newsTitle">عنوان خبر</label>
+                        <input type="text" id="newsTitle" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsDate">تاریخ انتشار</label>
+                        <input type="date" id="newsDate" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>تصویر خبر</label>
+                        <div class="image-upload-container" id="imageUploadContainer">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>برای آپلود تصویر کلیک کنید</p>
+                            <input type="file" id="newsImageUpload" accept="image/*" style="display: none;">
+                            <img id="imagePreview" class="image-preview" alt="پیش‌نمایش تصویر">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsContent">متن خبر</label>
+                        <textarea id="newsContent" class="form-control" rows="6" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">ذخیره خبر</button>
+                </form>
+            </div>
+            
+            <!-- تب مدیریت نظرات -->
+            <div class="admin-tab-content" id="comments-tab">
+                <h3 class="section-title">مدیریت نظرات کاربران</h3>
+                
+                <div class="comments-filter">
+                    <button class="filter-btn active" data-filter="pending">در انتظار تایید</button>
+                    <button class="filter-btn" data-filter="approved">تایید شده</button>
+                    <button class="filter-btn" data-filter="rejected">رد شده</button>
+                    <button class="filter-btn" data-filter="all">همه نظرات</button>
+                </div>
+                
+                <div class="comments-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="pendingCount">0</div>
+                        <div class="stat-label">در انتظار تایید</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="approvedCount">0</div>
+                        <div class="stat-label">تایید شده</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="rejectedCount">0</div>
+                        <div class="stat-label">رد شده</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalCount">0</div>
+                        <div class="stat-label">کل نظرات</div>
+                    </div>
+                </div>
+                
+                <div class="comments-list" id="adminCommentsList">
+                    <div class="comment-item">
+                        <p>هیچ نظری وجود ندارد.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تب مدیریت گالری -->
+            <div class="admin-tab-content" id="gallery-tab">
+                <h3 class="section-title">تصاویر موجود در گالری</h3>
+                <div class="gallery-list" id="adminGalleryList">
+                    <div class="gallery-item">
+                        <p>هیچ تصویری در گالری وجود ندارد.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تب افزودن تصویر جدید به گالری -->
+            <div class="admin-tab-content" id="add-gallery-tab">
+                <h3 class="section-title">افزودن تصویر جدید به گالری</h3>
+                <form id="addGalleryForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="galleryTitle">عنوان تصویر</label>
+                            <input type="text" id="galleryTitle" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="galleryCategory">دسته‌بندی</label>
+                            <select id="galleryCategory" class="form-control" required>
+                                <option value="ceremony">مراسم‌ها</option>
+                                <option value="sport">فعالیت‌های ورزشی</option>
+                                <option value="science">فعالیت‌های علمی</option>
+                                <option value="campus">فضای آموزشی</option>
+                                <option value="trip">اردوها</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="galleryDescription">توضیحات تصویر</label>
+                        <textarea id="galleryDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>آپلود تصویر</label>
+                        <div class="image-upload-container" id="galleryUploadContainer">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>برای آپلود تصویر کلیک کنید یا فایل را اینجا رها کنید</p>
+                            <input type="file" id="galleryImageUpload" accept="image/*" style="display: none;">
+                            <img id="galleryImagePreview" class="image-preview" alt="پیش‌نمایش تصویر">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">ذخیره در گالری</button>
+                </form>
+                
+                <div class="gallery-preview" id="galleryPreview">
+                    <!-- تصاویر گالری در اینجا نمایش داده می‌شوند -->
+                </div>
+            </div>
+            
+            <!-- تب مدیریت رویدادها -->
+            <div class="admin-tab-content" id="events-tab">
+                <h3 class="section-title">مدیریت رویدادها</h3>
+                <form id="addEventForm">
+                    <div class="form-group">
+                        <label for="eventTitle">عنوان رویداد</label>
+                        <input type="text" id="eventTitle" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventDate">تاریخ رویداد</label>
+                        <input type="date" id="eventDate" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventDescription">توضیحات رویداد</label>
+                        <textarea id="eventDescription" class="form-control" rows="4"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">ذخیره رویداد</button>
+                </form>
+                
+                <div class="events-list mt-4" id="adminEventsList">
+                    <div class="event-item">
+                        <p>هیچ رویدادی وجود ندارد.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تب مدیریت قرآن و عترت -->
+            <div class="admin-tab-content" id="quran-tab">
+                <h3 class="section-title">مدیریت محتوای قرآن و عترت</h3>
+                
+                <!-- مدیریت آیات روز -->
+                <div class="form-group">
+                    <h4>مدیریت آیات روز</h4>
+                    <div id="quran-verses-list">
+                        <!-- لیست آیات موجود -->
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="verseArabic">متن عربی آیه</label>
+                            <textarea id="verseArabic" class="form-control" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="verseTranslation">ترجمه فارسی</label>
+                            <textarea id="verseTranslation" class="form-control" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="verseReference">منبع آیه</label>
+                        <input type="text" id="verseReference" class="form-control" placeholder="مثال: سوره غافر، آیه ۶۰" required>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="addQuranVerse()">
+                        <i class="fas fa-plus"></i> افزودن آیه جدید
+                    </button>
+                </div>
+                
+                <!-- مدیریت برنامه هفتگی -->
+                <div class="form-group mt-4">
+                    <h4>مدیریت برنامه هفتگی قرآن و عترت</h4>
+                    <div id="quran-schedule-list">
+                        <!-- لیست برنامه‌های موجود -->
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="scheduleDay">روز هفته</label>
+                            <select id="scheduleDay" class="form-control" required>
+                                <option value="شنبه">شنبه</option>
+                                <option value="یکشنبه">یکشنبه</option>
+                                <option value="دوشنبه">دوشنبه</option>
+                                <option value="سه‌شنبه">سه‌شنبه</option>
+                                <option value="چهارشنبه">چهارشنبه</option>
+                                <option value="پنج شنبه">پنج شنبه</option>
+                                <option value="جمعه">جمعه</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="scheduleTime">ساعت</label>
+                            <input type="text" id="scheduleTime" class="form-control" placeholder="مثال: ۱۰-۸ صبح" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="scheduleProgram">برنامه</label>
+                        <textarea id="scheduleProgram" class="form-control" rows="2" required></textarea>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="addScheduleItem()">
+                        <i class="fas fa-plus"></i> افزودن برنامه
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // اطلاعات ورود پیش‌فرض
+        const ADMIN_CREDENTIALS = {
+            username: "admin",
+            password: "helli1403"
+        };
+
+        // داده‌های نمونه
+        const defaultNews = [
+            {
+                id: 1,
+                title: "کسب مقام اول در مسابقات علمی کشوری",
+                date: "۱۴۰۳/۰۳/۲۵",
+                content: "تیم المپیاد دانش‌آموزی مدرسه علامه حلی در مسابقات علمی کشوری مقام اول را کسب کرد...",
+                image: ""
+            }
+        ];
+
+        const defaultEvents = [
+            { 
+                id: 1, 
+                title: "آغاز امتحانات پایانی", 
+                date: "۱۴۰۳/۰۴/۰۵",
+                description: "امتحانات پایانی نیمسال دوم از تاریخ ۵ اردیبهشت آغاز خواهد شد."
+            }
+        ];
+
+        const defaultGallery = [
+            {
+                id: 1,
+                title: "مراسم افتتاحیه سال تحصیلی",
+                category: "ceremony",
+                image: "",
+                description: "مراسم باشکوه آغاز سال تحصیلی"
+            }
+        ];
+
+        const defaultComments = {
+            1: [
+                {
+                    id: 1,
+                    newsId: 1,
+                    author: "والدین دانش آموز",
+                    email: "parent@example.com",
+                    content: "بسیار عالی! واقعاً به موفقیت بچه‌ها افتخار می‌کنیم.",
+                    date: "۱۴۰۳/۰۳/۲۶",
+                    time: "۱۰:۳۰",
+                    status: "pending"
+                }
+            ]
+        };
+
+        // آیات پیش‌فرض قرآن
+        const defaultQuranVerses = [
+            {
+                arabic: "وَ قَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ",
+                translation: "و پروردگارتان گفته است: «مرا بخوانید تا شما را اجابت کنم.»",
+                reference: "سوره غافر، آیه ۶۰"
+            },
+            {
+                arabic: "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+                translation: "بی‌گمان با دشواری آسانی است.",
+                reference: "سوره انشراح، آیه ۶"
+            }
+        ];
+
+        // برنامه هفتگی پیش‌فرض
+        const defaultSchedule = [
+            {
+                day: "شنبه",
+                time: "۱۰-۸ صبح",
+                program: "کلاس تفسیر قرآن"
+            },
+            {
+                day: "یکشنبه",
+                time: "۱۱-۱۰ صبح",
+                program: "جلسه اخلاق اسلامی"
+            }
+        ];
+
+        // بررسی وضعیت ورود
+        function checkLoginStatus() {
+            return localStorage.getItem('adminLoggedIn') === 'true';
+        }
+
+        // لاگین کاربر
+        function login(username, password) {
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                localStorage.setItem('adminLoggedIn', 'true');
+                return true;
+            }
+            return false;
+        }
+
+        // لاگ اوت کاربر
+        function logout() {
+            localStorage.removeItem('adminLoggedIn');
+            window.location.reload();
+        }
+
+        // نمایش/مخفی کردن رمز عبور
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePassword').querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.className = 'fas fa-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.className = 'fas fa-eye';
+            }
+        }
+
+        // DOM Elements
+        const loginPage = document.getElementById('loginPage');
+        const adminPanel = document.getElementById('adminPanel');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const togglePasswordBtn = document.getElementById('togglePassword');
+        const adminNewsList = document.getElementById('adminNewsList');
+        const adminGalleryList = document.getElementById('adminGalleryList');
+        const adminEventsList = document.getElementById('adminEventsList');
+        const adminCommentsList = document.getElementById('adminCommentsList');
+        const addNewsForm = document.getElementById('addNewsForm');
+        const addGalleryForm = document.getElementById('addGalleryForm');
+        const addEventForm = document.getElementById('addEventForm');
+        const adminTabs = document.querySelectorAll('.admin-tab');
+        const adminTabContents = document.querySelectorAll('.admin-tab-content');
+        const imageUploadContainer = document.getElementById('imageUploadContainer');
+        const newsImageUpload = document.getElementById('newsImageUpload');
+        const imagePreview = document.getElementById('imagePreview');
+        const galleryUploadContainer = document.getElementById('galleryUploadContainer');
+        const galleryImageUpload = document.getElementById('galleryImageUpload');
+        const galleryImagePreview = document.getElementById('galleryImagePreview');
+        const galleryPreview = document.getElementById('galleryPreview');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
+        let uploadedNewsImage = null;
+        let uploadedGalleryImage = null;
+        let currentCommentFilter = 'pending';
+
+        // ==================== مدیریت اخبار ====================
+        function renderAdminNews() {
+            const savedNews = localStorage.getItem('schoolNews');
+            const newsData = savedNews ? JSON.parse(savedNews) : defaultNews;
+            
+            adminNewsList.innerHTML = '';
+            
+            if (newsData.length === 0) {
+                adminNewsList.innerHTML = '<div class="news-item"><p>هیچ خبری وجود ندارد.</p></div>';
+                return;
+            }
+            
+            newsData.forEach(news => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-item';
+                newsItem.innerHTML = `
+                    <div class="news-item-info">
+                        <h4>${news.title}</h4>
+                        <div class="news-item-date">${news.date}</div>
+                    </div>
+                    <div class="news-item-actions">
+                        <button class="btn btn-danger" onclick="deleteNews(${news.id})">حذف</button>
+                    </div>
+                `;
+                adminNewsList.appendChild(newsItem);
+            });
+            
+            // به‌روزرسانی آمار داشبورد
+            updateDashboardStats();
+        }
+
+        function addNews(title, date, content, image = '') {
+            const savedNews = localStorage.getItem('schoolNews');
+            let newsData = savedNews ? JSON.parse(savedNews) : defaultNews;
+            
+            const newNews = {
+                id: newsData.length > 0 ? Math.max(...newsData.map(n => n.id)) + 1 : 1,
+                title,
+                date: formatDate(date),
+                content,
+                image
+            };
+            
+            newsData.unshift(newNews);
+            localStorage.setItem('schoolNews', JSON.stringify(newsData));
+            renderAdminNews();
+            
+            switchTab('news-tab');
+            addNewsForm.reset();
+            imagePreview.style.display = 'none';
+            uploadedNewsImage = null;
+            
+            alert('خبر با موفقیت اضافه شد!');
+        }
+
+        function deleteNews(id) {
+            if (confirm('آیا از حذف این خبر مطمئن هستید؟')) {
+                const savedNews = localStorage.getItem('schoolNews');
+                let newsData = JSON.parse(savedNews);
+                
+                newsData = newsData.filter(news => news.id !== id);
+                localStorage.setItem('schoolNews', JSON.stringify(newsData));
+                renderAdminNews();
+            }
+        }
+
+        // ==================== مدیریت گالری ====================
+        function renderAdminGallery() {
+            const savedGallery = localStorage.getItem('schoolGallery');
+            const galleryData = savedGallery ? JSON.parse(savedGallery) : defaultGallery;
+            
+            adminGalleryList.innerHTML = '';
+            galleryPreview.innerHTML = '';
+            
+            if (galleryData.length === 0) {
+                adminGalleryList.innerHTML = '<div class="gallery-item"><p>هیچ تصویری در گالری وجود ندارد.</p></div>';
+                return;
+            }
+            
+            // لیست مدیریت
+            galleryData.forEach(image => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.innerHTML = `
+                    <div class="gallery-item-info">
+                        <h4>${image.title}</h4>
+                        <div class="gallery-item-category">${getCategoryName(image.category)}</div>
+                    </div>
+                    <div class="gallery-item-actions">
+                        <button class="btn btn-danger" onclick="deleteGalleryImage(${image.id})">حذف</button>
+                    </div>
+                `;
+                adminGalleryList.appendChild(galleryItem);
+            });
+            
+            // پیش‌نمایش تصاویر
+            galleryData.forEach(image => {
+                const previewItem = document.createElement('div');
+                previewItem.className = 'gallery-preview-item';
+                previewItem.innerHTML = `
+                    <img src="${image.image}" alt="${image.title}">
+                    <div class="gallery-preview-actions">
+                        <button class="btn btn-danger btn-sm" onclick="deleteGalleryImage(${image.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                galleryPreview.appendChild(previewItem);
+            });
+            
+            // به‌روزرسانی آمار داشبورد
+            updateDashboardStats();
+        }
+
+        function addGalleryImage(title, category, description, image) {
+            const savedGallery = localStorage.getItem('schoolGallery');
+            let galleryData = savedGallery ? JSON.parse(savedGallery) : defaultGallery;
+            
+            const newImage = {
+                id: galleryData.length > 0 ? Math.max(...galleryData.map(img => img.id)) + 1 : 1,
+                title,
+                category,
+                image,
+                description
+            };
+            
+            galleryData.unshift(newImage);
+            localStorage.setItem('schoolGallery', JSON.stringify(galleryData));
+            renderAdminGallery();
+            
+            addGalleryForm.reset();
+            galleryImagePreview.style.display = 'none';
+            uploadedGalleryImage = null;
+            
+            alert('تصویر با موفقیت به گالری اضافه شد!');
+        }
+
+        function deleteGalleryImage(id) {
+            if (confirm('آیا از حذف این تصویر مطمئن هستید؟')) {
+                const savedGallery = localStorage.getItem('schoolGallery');
+                let galleryData = JSON.parse(savedGallery);
+                
+                galleryData = galleryData.filter(image => image.id !== id);
+                localStorage.setItem('schoolGallery', JSON.stringify(galleryData));
+                renderAdminGallery();
+            }
+        }
+
+        function getCategoryName(category) {
+            const categories = {
+                'ceremony': 'مراسم‌ها',
+                'sport': 'فعالیت‌های ورزشی',
+                'science': 'فعالیت‌های علمی',
+                'campus': 'فضای آموزشی',
+                'trip': 'اردوها'
+            };
+            return categories[category] || category;
+        }
+
+        // ==================== مدیریت رویدادها ====================
+        function renderAdminEvents() {
+            const savedEvents = localStorage.getItem('schoolEvents');
+            const eventsData = savedEvents ? JSON.parse(savedEvents) : defaultEvents;
+            
+            adminEventsList.innerHTML = '';
+            
+            if (eventsData.length === 0) {
+                adminEventsList.innerHTML = '<div class="event-item"><p>هیچ رویدادی وجود ندارد.</p></div>';
+                return;
+            }
+            
+            eventsData.forEach(event => {
+                const eventItem = document.createElement('div');
+                eventItem.className = 'event-item';
+                eventItem.innerHTML = `
+                    <div class="event-item-info">
+                        <h4>${event.title}</h4>
+                        <div class="event-item-date">${event.date}</div>
+                    </div>
+                    <div class="event-item-actions">
+                        <button class="btn btn-danger" onclick="deleteEvent(${event.id})">حذف</button>
+                    </div>
+                `;
+                adminEventsList.appendChild(eventItem);
+            });
+            
+            // به‌روزرسانی آمار داشبورد
+            updateDashboardStats();
+        }
+
+        function addEvent(title, date, description) {
+            const savedEvents = localStorage.getItem('schoolEvents');
+            let eventsData = savedEvents ? JSON.parse(savedEvents) : defaultEvents;
+            
+            const newEvent = {
+                id: eventsData.length > 0 ? Math.max(...eventsData.map(e => e.id)) + 1 : 1,
+                title,
+                date: formatDate(date),
+                description
+            };
+            
+            eventsData.push(newEvent);
+            localStorage.setItem('schoolEvents', JSON.stringify(eventsData));
+            renderAdminEvents();
+            addEventForm.reset();
+            
+            alert('رویداد با موفقیت اضافه شد!');
+        }
+
+        function deleteEvent(id) {
+            if (confirm('آیا از حذف این رویداد مطمئن هستید؟')) {
+                const savedEvents = localStorage.getItem('schoolEvents');
+                let eventsData = JSON.parse(savedEvents);
+                
+                eventsData = eventsData.filter(event => event.id !== id);
+                localStorage.setItem('schoolEvents', JSON.stringify(eventsData));
+                renderAdminEvents();
+            }
+        }
+
+        // ==================== مدیریت نظرات ====================
+        function renderAdminComments(filter = 'pending') {
+            const commentsList = document.getElementById('adminCommentsList');
+            const savedComments = localStorage.getItem('schoolComments');
+            const savedNews = localStorage.getItem('schoolNews');
+            const commentsData = savedComments ? JSON.parse(savedComments) : defaultComments;
+            const newsData = savedNews ? JSON.parse(savedNews) : defaultNews;
+            
+            commentsList.innerHTML = '';
+            
+            // جمع‌آوری تمام نظرات
+            let allComments = [];
+            Object.keys(commentsData).forEach(newsId => {
+                commentsData[newsId].forEach(comment => {
+                    const news = newsData.find(n => n.id == newsId);
+                    allComments.push({
+                        ...comment,
+                        newsTitle: news ? news.title : 'خبر حذف شده'
+                    });
+                });
+            });
+            
+            // فیلتر کردن نظرات
+            let filteredComments = allComments;
+            if (filter !== 'all') {
+                filteredComments = allComments.filter(comment => comment.status === filter);
+            }
+            
+            // به‌روزرسانی آمار
+            updateCommentsStats(allComments);
+            
+            if (filteredComments.length === 0) {
+                commentsList.innerHTML = `
+                    <div class="comment-item">
+                        <p>هیچ نظری ${getFilterLabel(filter)} وجود ندارد.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // نمایش نظرات
+            filteredComments.forEach(comment => {
+                const commentItem = document.createElement('div');
+                commentItem.className = `comment-admin-item ${comment.status}`;
+                commentItem.innerHTML = `
+                    <div class="comment-admin-header">
+                        <div class="comment-admin-info">
+                            <h4>${comment.author}</h4>
+                            <div class="comment-admin-meta">
+                                <span>${comment.email}</span>
+                                <span> • </span>
+                                <span>${comment.date} - ${comment.time}</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-${comment.status}">
+                            ${getStatusLabel(comment.status)}
+                        </span>
+                    </div>
+                    
+                    <div class="comment-news-info">
+                        <i class="fas fa-newspaper"></i>
+                        خبر: ${comment.newsTitle}
+                    </div>
+                    
+                    <div class="comment-admin-content">
+                        ${comment.content}
+                    </div>
+                    
+                    <div class="comment-admin-actions">
+                        ${comment.status === 'pending' ? `
+                            <button class="btn btn-success" onclick="approveComment(${comment.newsId}, ${comment.id})">
+                                <i class="fas fa-check"></i> تایید
+                            </button>
+                            <button class="btn btn-danger" onclick="rejectComment(${comment.newsId}, ${comment.id})">
+                                <i class="fas fa-times"></i> رد
+                            </button>
+                        ` : ''}
+                        
+                        ${comment.status === 'approved' ? `
+                            <button class="btn btn-warning" onclick="pendingComment(${comment.newsId}, ${comment.id})">
+                                <i class="fas fa-clock"></i> انتظار
+                            </button>
+                            <button class="btn btn-danger" onclick="rejectComment(${comment.newsId}, ${comment.id})">
+                                <i class="fas fa-times"></i> رد
+                            </button>
+                        ` : ''}
+                        
+                        ${comment.status === 'rejected' ? `
+                            <button class="btn btn-success" onclick="approveComment(${comment.newsId}, ${comment.id})">
+                                <i class="fas fa-check"></i> تایید
+                            </button>
+                            <button class="btn btn-warning" onclick="pendingComment(${comment.newsId}, ${comment.id})">
+                                <i class="fas fa-clock"></i> انتظار
+                            </button>
+                        ` : ''}
+                        
+                        <button class="btn btn-danger" onclick="deleteComment(${comment.newsId}, ${comment.id})">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                    </div>
+                `;
+                commentsList.appendChild(commentItem);
+            });
+            
+            // به‌روزرسانی آمار داشبورد
+            updateDashboardStats();
+        }
+
+        function updateCommentsStats(allComments) {
+            const pendingCount = allComments.filter(c => c.status === 'pending').length;
+            const approvedCount = allComments.filter(c => c.status === 'approved').length;
+            const rejectedCount = allComments.filter(c => c.status === 'rejected').length;
+            const totalCount = allComments.length;
+            
+            document.getElementById('pendingCount').textContent = pendingCount;
+            document.getElementById('approvedCount').textContent = approvedCount;
+            document.getElementById('rejectedCount').textContent = rejectedCount;
+            document.getElementById('totalCount').textContent = totalCount;
+        }
+
+        function approveComment(newsId, commentId) {
+            updateCommentStatus(newsId, commentId, 'approved');
+        }
+
+        function rejectComment(newsId, commentId) {
+            updateCommentStatus(newsId, commentId, 'rejected');
+        }
+
+        function pendingComment(newsId, commentId) {
+            updateCommentStatus(newsId, commentId, 'pending');
+        }
+
+        function updateCommentStatus(newsId, commentId, status) {
+            const savedComments = localStorage.getItem('schoolComments');
+            const commentsData = savedComments ? JSON.parse(savedComments) : defaultComments;
+            
+            if (commentsData[newsId]) {
+                const commentIndex = commentsData[newsId].findIndex(c => c.id === commentId);
+                if (commentIndex !== -1) {
+                    commentsData[newsId][commentIndex].status = status;
+                    localStorage.setItem('schoolComments', JSON.stringify(commentsData));
+                    renderAdminComments(currentCommentFilter);
+                    alert('وضعیت نظر با موفقیت به‌روزرسانی شد.');
+                }
+            }
+        }
+
+        function deleteComment(newsId, commentId) {
+            if (confirm('آیا از حذف این نظر مطمئن هستید؟')) {
+                const savedComments = localStorage.getItem('schoolComments');
+                const commentsData = savedComments ? JSON.parse(savedComments) : defaultComments;
+                
+                if (commentsData[newsId]) {
+                    commentsData[newsId] = commentsData[newsId].filter(c => c.id !== commentId);
+                    localStorage.setItem('schoolComments', JSON.stringify(commentsData));
+                    renderAdminComments(currentCommentFilter);
+                    alert('نظر با موفقیت حذف شد.');
+                }
+            }
+        }
+
+        function getFilterLabel(filter) {
+            const labels = {
+                'pending': 'در انتظار تایید',
+                'approved': 'تایید شده',
+                'rejected': 'رد شده',
+                'all': ''
+            };
+            return labels[filter] || '';
+        }
+
+        function getStatusLabel(status) {
+            const labels = {
+                'pending': 'در انتظار تایید',
+                'approved': 'تایید شده',
+                'rejected': 'رد شده'
+            };
+            return labels[status] || status;
+        }
+
+        // ==================== مدیریت قرآن و عترت ====================
+        function renderQuranVerses() {
+            const savedVerses = localStorage.getItem('quranVerses');
+            const versesData = savedVerses ? JSON.parse(savedVerses) : defaultQuranVerses;
+            
+            const versesList = document.getElementById('quran-verses-list');
+            versesList.innerHTML = '';
+            
+            if (versesData.length === 0) {
+                versesList.innerHTML = '<p>هیچ آیه‌ای اضافه نشده است.</p>';
+                return;
+            }
+            
+            versesData.forEach((verse, index) => {
+                const verseItem = document.createElement('div');
+                verseItem.className = 'comment-admin-item';
+                verseItem.innerHTML = `
+                    <div class="comment-admin-header">
+                        <div class="comment-admin-info">
+                            <h4>آیه ${index + 1}</h4>
+                            <div class="comment-admin-meta">${verse.reference}</div>
+                        </div>
+                        <div class="comment-admin-actions">
+                            <button class="btn btn-danger btn-sm" onclick="deleteQuranVerse(${index})">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                        </div>
+                    </div>
+                    <div class="comment-admin-content">
+                        <strong>متن عربی:</strong><br>
+                        ${verse.arabic}
+                    </div>
+                    <div class="comment-admin-content">
+                        <strong>ترجمه:</strong><br>
+                        ${verse.translation}
+                    </div>
+                `;
+                versesList.appendChild(verseItem);
+            });
+            
+            // به‌روزرسانی آمار داشبورد
+            updateDashboardStats();
+        }
+
+        function addQuranVerse() {
+            const arabic = document.getElementById('verseArabic').value;
+            const translation = document.getElementById('verseTranslation').value;
+            const reference = document.getElementById('verseReference').value;
+            
+            if (!arabic || !translation || !reference) {
+                alert('لطفاً تمام فیلدها را پر کنید');
+                return;
+            }
+            
+            const savedVerses = localStorage.getItem('quranVerses');
+            const versesData = savedVerses ? JSON.parse(savedVerses) : defaultQuranVerses;
+            
+            const newVerse = {
+                arabic,
+                translation,
+                reference
+            };
+            
+            versesData.push(newVerse);
+            localStorage.setItem('quranVerses', JSON.stringify(versesData));
+            
+            renderQuranVerses();
+            
+            // پاک کردن فرم
+            document.getElementById('verseArabic').value = '';
+            document.getElementById('verseTranslation').value = '';
+            document.getElementById('verseReference').value = '';
+            
+            alert('آیه جدید با موفقیت اضافه شد!');
+        }
+
+        function deleteQuranVerse(index) {
+            if (confirm('آیا از حذف این آیه مطمئن هستید؟')) {
+                const savedVerses = localStorage.getItem('quranVerses');
+                const versesData = JSON.parse(savedVerses);
+                
+                versesData.splice(index, 1);
+                localStorage.setItem('quranVerses', JSON.stringify(versesData));
+                renderQuranVerses();
+            }
+        }
+
+        function renderQuranSchedule() {
+            const savedSchedule = localStorage.getItem('quranSchedule');
+            const scheduleData = savedSchedule ? JSON.parse(savedSchedule) : defaultSchedule;
+            
+            const scheduleList = document.getElementById('quran-schedule-list');
+            scheduleList.innerHTML = '';
+            
+            if (scheduleData.length === 0) {
+                scheduleList.innerHTML = '<p>هیچ برنامه‌ای اضافه نشده است.</p>';
+                return;
+            }
+            
+            scheduleData.forEach((item, index) => {
+                const scheduleItem = document.createElement('div');
+                scheduleItem.className = 'comment-admin-item';
+                scheduleItem.innerHTML = `
+                    <div class="comment-admin-header">
+                        <div class="comment-admin-info">
+                            <h4>${item.day}</h4>
+                            <div class="comment-admin-meta">${item.time}</div>
+                        </div>
+                        <div class="comment-admin-actions">
+                            <button class="btn btn-danger btn-sm" onclick="deleteScheduleItem(${index})">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                        </div>
+                    </div>
+                    <div class="comment-admin-content">
+                        ${item.program}
+                    </div>
+                `;
+                scheduleList.appendChild(scheduleItem);
+            });
+        }
+
+        function addScheduleItem() {
+            const day = document.getElementById('scheduleDay').value;
+            const time = document.getElementById('scheduleTime').value;
+            const program = document.getElementById('scheduleProgram').value;
+            
+            if (!day || !time || !program) {
+                alert('لطفاً تمام فیلدها را پر کنید');
+                return;
+            }
+            
+            const savedSchedule = localStorage.getItem('quranSchedule');
+            const scheduleData = savedSchedule ? JSON.parse(savedSchedule) : defaultSchedule;
+            
+            const newItem = {
+                day,
+                time,
+                program
+            };
+            
+            scheduleData.push(newItem);
+            localStorage.setItem('quranSchedule', JSON.stringify(scheduleData));
+            
+            renderQuranSchedule();
+            
+            // پاک کردن فرم
+            document.getElementById('scheduleTime').value = '';
+            document.getElementById('scheduleProgram').value = '';
+            
+            alert('برنامه جدید با موفقیت اضافه شد!');
+        }
+
+        function deleteScheduleItem(index) {
+            if (confirm('آیا از حذف این برنامه مطمئن هستید؟')) {
+                const savedSchedule = localStorage.getItem('quranSchedule');
+                const scheduleData = JSON.parse(savedSchedule);
+                
+                scheduleData.splice(index, 1);
+                localStorage.setItem('quranSchedule', JSON.stringify(scheduleData));
+                renderQuranSchedule();
+            }
+        }
+
+        // ==================== داشبورد ====================
+        function updateDashboardStats() {
+            const savedNews = localStorage.getItem('schoolNews');
+            const savedEvents = localStorage.getItem('schoolEvents');
+            const savedGallery = localStorage.getItem('schoolGallery');
+            const savedComments = localStorage.getItem('schoolComments');
+            const savedVerses = localStorage.getItem('quranVerses');
+            
+            const newsData = savedNews ? JSON.parse(savedNews) : defaultNews;
+            const eventsData = savedEvents ? JSON.parse(savedEvents) : defaultEvents;
+            const galleryData = savedGallery ? JSON.parse(savedGallery) : defaultGallery;
+            const commentsData = savedComments ? JSON.parse(savedComments) : defaultComments;
+            const versesData = savedVerses ? JSON.parse(savedVerses) : defaultQuranVerses;
+            
+            // جمع‌آوری تمام نظرات
+            let allComments = [];
+            Object.keys(commentsData).forEach(newsId => {
+                commentsData[newsId].forEach(comment => {
+                    allComments.push(comment);
+                });
+            });
+            
+            const pendingComments = allComments.filter(c => c.status === 'pending').length;
+            
+            document.getElementById('newsCount').textContent = newsData.length;
+            document.getElementById('eventsCount').textContent = eventsData.length;
+            document.getElementById('commentsCount').textContent = pendingComments;
+            document.getElementById('galleryCount').textContent = galleryData.length;
+            document.getElementById('quranCount').textContent = versesData.length;
+        }
+
+        // ==================== توابع کمکی ====================
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}/${month}/${day}`;
+        }
+
+        function switchTab(tabId) {
+            adminTabs.forEach(tab => tab.classList.remove('active'));
+            adminTabContents.forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`.admin-tab[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function handleNewsImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    uploadedNewsImage = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleGalleryImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    galleryImagePreview.src = e.target.result;
+                    galleryImagePreview.style.display = 'block';
+                    uploadedGalleryImage = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // ==================== Event Listeners ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            if (checkLoginStatus()) {
+                loginPage.style.display = 'none';
+                adminPanel.style.display = 'block';
+                renderAdminNews();
+                renderAdminGallery();
+                renderAdminEvents();
+                renderAdminComments();
+                renderQuranVerses();
+                renderQuranSchedule();
+                updateDashboardStats();
+            } else {
+                loginPage.style.display = 'block';
+                adminPanel.style.display = 'none';
+            }
+            
+            // فرم ورود
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (login(username, password)) {
+                    loginPage.style.display = 'none';
+                    adminPanel.style.display = 'block';
+                    renderAdminNews();
+                    renderAdminGallery();
+                    renderAdminEvents();
+                    renderAdminComments();
+                    renderQuranVerses();
+                    renderQuranSchedule();
+                    updateDashboardStats();
+                } else {
+                    loginError.style.display = 'block';
+                }
+            });
+            
+            // دکمه خروج
+            logoutBtn.addEventListener('click', logout);
+            
+            // نمایش/مخفی کردن رمز عبور
+            togglePasswordBtn.addEventListener('click', togglePasswordVisibility);
+            
+            // تغییر تب‌ها
+            adminTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+            
+            // فیلترهای نظرات
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    currentCommentFilter = filter;
+                    
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    renderAdminComments(filter);
+                });
+            });
+            
+            // افزودن خبر جدید
+            addNewsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const title = document.getElementById('newsTitle').value;
+                const date = document.getElementById('newsDate').value;
+                const content = document.getElementById('newsContent').value;
+                
+                addNews(title, date, content, uploadedNewsImage);
+            });
+            
+            // افزودن تصویر به گالری
+            addGalleryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const title = document.getElementById('galleryTitle').value;
+                const category = document.getElementById('galleryCategory').value;
+                const description = document.getElementById('galleryDescription').value;
+                
+                if (!uploadedGalleryImage) {
+                    alert('لطفاً یک تصویر انتخاب کنید');
+                    return;
+                }
+                
+                addGalleryImage(title, category, description, uploadedGalleryImage);
+            });
+            
+            // افزودن رویداد جدید
+            addEventForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const title = document.getElementById('eventTitle').value;
+                const date = document.getElementById('eventDate').value;
+                const description = document.getElementById('eventDescription').value;
+                
+                addEvent(title, date, description);
+            });
+            
+            // آپلود تصاویر
+            imageUploadContainer.addEventListener('click', () => newsImageUpload.click());
+            newsImageUpload.addEventListener('change', handleNewsImageUpload);
+            
+            galleryUploadContainer.addEventListener('click', () => galleryImageUpload.click());
+            galleryImageUpload.addEventListener('change', handleGalleryImageUpload);
+            
+            // درگ و دراپ برای گالری
+            galleryUploadContainer.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                galleryUploadContainer.style.borderColor = 'var(--primary)';
+            });
+            
+            galleryUploadContainer.addEventListener('dragleave', () => {
+                galleryUploadContainer.style.borderColor = '#ddd';
+            });
+            
+            galleryUploadContainer.addEventListener('drop', (e) => {
+                e.preventDefault();
+                galleryUploadContainer.style.borderColor = '#ddd';
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    galleryImageUpload.files = files;
+                    handleGalleryImageUpload({ target: { files: files } });
+                }
+            });
+        });
+
+        // توابع سراسری
+        window.deleteNews = deleteNews;
+        window.deleteEvent = deleteEvent;
+        window.deleteGalleryImage = deleteGalleryImage;
+        window.approveComment = approveComment;
+        window.rejectComment = rejectComment;
+        window.pendingComment = pendingComment;
+        window.deleteComment = deleteComment;
+        window.addQuranVerse = addQuranVerse;
+        window.deleteQuranVerse = deleteQuranVerse;
+        window.addScheduleItem = addScheduleItem;
+        window.deleteScheduleItem = deleteScheduleItem;
+    </script>
+</body>
+</html>
